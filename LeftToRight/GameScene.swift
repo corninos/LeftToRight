@@ -33,7 +33,7 @@ class GameScene: SKScene {
 //                primotocco += 1
 //            print(touch.location(in: self))
             let obstacles: [GKPolygonObstacle] = SKNode.obstacles(fromNodePhysicsBodies: self["wall/*"] as! [SKSpriteNode])
-            let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 101)
+            let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 70)
             
             // Create a node for the user's current position, and the user's destination.
             let startNode = GKGraphNode2D(point: float2(touch.location(in: self)))
@@ -69,7 +69,7 @@ class GameScene: SKScene {
             
             pathline.strokeColor = UIColor.yellow
             
-//            self.addChild(pathline)
+            self.addChild(pathline)
             }else{
                 entityManager.spara()
             }

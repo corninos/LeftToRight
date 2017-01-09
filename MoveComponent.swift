@@ -24,7 +24,10 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
         self.maxSpeed = maxSpeed
         self.maxAcceleration = maxAcceleration
         self.radius = radius
-        self.mass = 0.02
+        print(self.radius)
+        self.mass = 1
+        
+        
 
     }
     required init?(coder aDecoder: NSCoder) {
@@ -50,13 +53,13 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        
         super.update(deltaTime: seconds)
 
         let component = entityManager.moveComponents()
         let target = entityManager.targetComponents()
-        
         behavior = MoveBehavior(agent: component, target: target, obstacles: obstacles, path: path)
+
+        
 
         
     }

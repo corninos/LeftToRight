@@ -14,8 +14,8 @@ class playerEntity: GKEntity {
     init(entityManager: EntityManager, texture: SKTexture, obstacles: [GKPolygonObstacle] ,path: [GKGraphNode]){
         super.init()
         self.addComponent(VisualComponent(texture: texture,fixed: false))
-        self.addComponent(MoveComponent(maxSpeed: 40, maxAcceleration: 10, radius: 70, entityManager: entityManager, obstacles: obstacles, path: path))
-        self.addComponent(FireComponent())
+        self.addComponent(MoveComponent(maxSpeed: 400, maxAcceleration: 200, radius: 70, entityManager: entityManager, obstacles: obstacles, path: path))
+//        self.addComponent(FireComponent())
     }
     
     required init?(coder aDecoder: NSCoder) {
