@@ -10,16 +10,17 @@ import GameplayKit
 import SpriteKit
 
 class targetEntity: GKEntity {
+  
+  init(entityManager: EntityManager, texture: SKTexture){
     
-    init(entityManager: EntityManager, texture: SKTexture){
-        super.init()
-        self.addComponent(VisualComponent(texture: texture,fixed: true))
-        self.addComponent(TargetComponent(entityManager: entityManager))
-    }
+    super.init()
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
+    self.addComponent(VisualComponent(texture: texture, fixed: true))
+    self.addComponent(TargetComponent(entityManager: entityManager))
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 }

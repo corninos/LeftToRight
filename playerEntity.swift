@@ -10,16 +10,27 @@ import GameplayKit
 import SpriteKit
 
 class playerEntity: GKEntity {
+  
+  init (entityManager: EntityManager,
+       texture: SKTexture,
+       obstacles: [GKPolygonObstacle],
+       path: [GKGraphNode]) {
     
-    init(entityManager: EntityManager, texture: SKTexture, obstacles: [GKPolygonObstacle] ,path: [GKGraphNode]){
-        super.init()
-        self.addComponent(VisualComponent(texture: texture,fixed: false))
-        self.addComponent(MoveComponent(maxSpeed: 400, maxAcceleration: 200, radius: 70, entityManager: entityManager, obstacles: obstacles, path: path))
-//        self.addComponent(FireComponent())
-    }
+    super.init()
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
+    self.addComponent(VisualComponent(texture: texture, fixed: false))
+    self.addComponent(MoveComponent(maxSpeed: 400,
+                                    maxAcceleration: 200,
+                                    radius: 70,
+                                    entityManager: entityManager,
+                                    obstacles: obstacles,
+                                    path: path))
+    // self.addComponent(FireComponent())
+    
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 }

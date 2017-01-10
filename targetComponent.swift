@@ -10,42 +10,45 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class TargetComponent : GKAgent2D, GKAgentDelegate {
+class TargetComponent : GKAgent2D {
+  
+  let entityManager: EntityManager
+  
+  init(entityManager: EntityManager) {
+    self.entityManager = entityManager
+    
+    super.init()
+    
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func update(deltaTime seconds: TimeInterval) {
+    super.update(deltaTime: seconds)
+    guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
+      return
+    }
+    position = float2(spriteComponent.node.position)
+  }
+  
+}
 
-    let entityManager: EntityManager
-    
-    init(entityManager: EntityManager) {
-        self.entityManager = entityManager
-        super.init()
+extension TargetComponent: GKAgentDelegate {
+  
+  func agentWillUpdate(_ agent: GKAgent) {
+    guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
+      return
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    position = float2(spriteComponent.node.position)
+  }
+  
+  func agentDidUpdate(_ agent: GKAgent) {
+    guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
+      return
     }
-    
-    func agentWillUpdate(_ agent: GKAgent) {
-        guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
-            return
-        }
-        position = float2(spriteComponent.node.position)
-    }
-    
-    func agentDidUpdate(_ agent: GKAgent) {
-        guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
-            return
-        }
-        
-        spriteComponent.node.position = CGPoint(position)
-    }
-    
-    override func update(deltaTime seconds: TimeInterval) {
-        
-        super.update(deltaTime: seconds)
-        guard let spriteComponent = entity?.component(ofType: VisualComponent.self) else {
-            return
-        }
-        
-        position = float2(spriteComponent.node.position)
-    }
-    
+    spriteComponent.node.position = CGPoint(position)
+  }
+  
 }
